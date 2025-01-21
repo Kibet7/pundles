@@ -1,0 +1,58 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+<h2>Choose Your Lucky Box!</h2>
+
+<!-- Lucky Box Game Form -->
+<form method="post" id="luckyBoxForm" style="max-width: 400px; margin: 0 auto; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+    {% csrf_token %}
+    <label for="phone_number">Phone Number:</label>
+    <input type="text" id="phone_number" name="phone_number" required placeholder="Enter your phone number" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 4px; border: 1px solid #ccc;">
+    
+    <label for="box_choice">Choose a box (1-3):</label>
+    <select id="box_choice" name="box_choice" style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 4px; border: 1px solid #ccc;">
+        <option value="1">Box 1</option>
+        <option value="2">Box 2</option>
+        <option value="3">Box 3</option>
+    </select>
+
+    <button type="submit" style="width: 100%; padding: 12px; background-color: #333; color: white; border: none; border-radius: 4px; font-size: 16px; cursor: pointer;">
+        Try Your Luck!
+    </button>
+</form>
+
+<!-- Result Display Section -->
+<div id="result" style="margin-top: 20px; font-size: 18px; text-align: center;"></div>
+
+<script>
+    document.getElementById('luckyBoxForm').addEventListener('submit', function(event) {
+        event.preventDefault();  // Prevent the form from submitting the usual way
+        
+        const formData = new FormData(this);
+        // Make the AJAX request to the server
+        fetch('', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'  // Tells the server it's an AJAX request
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            const resultElement = document.getElementById('result');
+            // Display the appropriate message
+            if (data.error) {
+                resultElement.style.color = 'red';  // Display error messages in red
+                resultElement.textContent = data.error;
+            } else {
+                resultElement.style.color = 'green';  // Display success messages in green
+                resultElement.textContent = data.message;
+            }
+        })
+        .catch(error => {
+            // Handle any potential errors during the fetch request
+            document.getElementById('result').textContent = 'An error occurred while processing your request.';
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'store/base.html' %}
+
+{% block title %}Welcome to MaraWins - Home{% endblock %}
+
+{% block content %}
+  <header>
+    <div class="intro">
+      <h1>Welcome to MaraWins</h1>
+      <p>Your gateway to exciting games and rewards. Sign in or create an account to start your journey!</p>
+    </div>
+  </header>
+
+  <section class="features">
+    <h3>Our Features</h3>
+    <ul>
+      <li>Engaging games with real-time rewards</li>
+      <li>Secure and simple account management</li>
+      <li>Exclusive prizes and lucky rewards</li>
+    </ul>
+  </section>
+
+  {% if user.is_authenticated %}
+    <section class="cta">
+      <h2>Ready to Play?</h2>
+      <p>Choose a lucky box and see what rewards await!</p>
+      <a href="{% url 'lucky_box' %}" class="btn">Play Now</a>
+    </section>
+  {% else %}
+    <section class="cta">
+      <h2>Get Started Today</h2>
+      <p>Create an account or log in to explore more.</p>
+      <a href="{% url 'register' %}" class="btn">Sign Up</a>
+      <a href="{% url 'login' %}" class="btn">Login</a>
+    </section>
+  {% endif %}
+{% endblock %}
