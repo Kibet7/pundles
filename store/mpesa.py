@@ -40,7 +40,7 @@ def initiate_mpesa_payment(phone_number, amount, callback_url):
         "TransactionType": "CustomerPayBillOnline",
         "Amount": amount,
         "PartyA": phone_number,
-        "PartyB": settings.BUSINESS_SHORTCODE,
+        "PartyB": '4976566',
         "PhoneNumber": phone_number,
         "CallBackURL": callback_url,
         "AccountReference": "Lucky Box",
