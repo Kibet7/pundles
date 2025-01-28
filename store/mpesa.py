@@ -37,7 +37,7 @@ def initiate_mpesa_payment(phone_number, amount, callback_url):
         "BusinessShortCode": settings.BUSINESS_SHORTCODE,
         "Password": generate_password(settings.BUSINESS_SHORTCODE, settings.MPESA_PASSKEY),
         "Timestamp": generate_timestamp(),
-        "TransactionType": "CustomerPayBillOnline",
+        "TransactionType": "CustomerBuyGoodsOnline",
         "Amount": amount,
         "PartyA": phone_number,
         "PartyB": '4976566',
