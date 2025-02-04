@@ -24,7 +24,7 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, 'Login successful! Welcome back.')
-                return redirect('store:lucky_box')  # Redirect to lucky box game after login
+                return redirect('lucky_box')  # Redirect to lucky box game after login
             else:
                 messages.error(request, 'Invalid phone number or password.')
         except CustomUser.DoesNotExist:
@@ -36,4 +36,4 @@ def logout_view(request):
     """Log out the user and redirect to the login page."""
     logout(request)
     messages.success(request, 'You have been logged out.')
-    return redirect('store:login')  # Adjust to your login URL name
+    return redirect('login')  # Adjust to your login URL name
